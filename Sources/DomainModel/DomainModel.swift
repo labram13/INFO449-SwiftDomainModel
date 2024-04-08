@@ -9,6 +9,9 @@ struct DomainModel {
 // Money
 //
 public struct Money {
+    var amount = Int
+    var currency = String
+    var validCurrency = 
 }
 
 ////////////////////////////////////

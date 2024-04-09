@@ -8,10 +8,66 @@ struct DomainModel {
 ////////////////////////////////////
 // Money
 //
-public struct Money {
-    var amount = Int
-    var currency = String
-    var validCurrency = 
+enum CustomError: Error {
+    case InvalidCurrency
+}
+struct Money {
+    var amount: Int
+    var currency: String
+    
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+    
+    static func create(amount: Int, currency: String) throws -> Money {
+        guard ["USD", "CAD", "EUR", "GBP"].contains(currency) else {
+            throw CustomError.InvalidCurrency
+        }
+        
+        return Money(amount: amount, currency: currency)
+    }
+    
+    
+    func convert(_ convertTo: String) -> Money {
+        var currAmount = Double(self.amount)
+        
+        //Convert to USD first
+        switch currency {
+        case "GBP":
+            currAmount = currAmount / 0.5
+        case "EUR":
+            currAmount = currAmount / 1.5
+        case "CAN":
+            currAmount = currAmount / 1.25
+        default:
+            break
+        }
+        
+        switch convertTo {
+        case "GBP":
+            currAmount = currAmount * 0.5
+        case "EUR":
+            currAmount = currAmount * 1.5
+        case "CAN":
+            currAmount = currAmount * 1.25
+        default:
+            return Money(amount: Int(currAmount), currency: convertTo)
+        }
+        
+        //Convert to desired currency
+        return Money(amount: Int(currAmount), currency: convertTo)
+    }
+    
+    func add(_ money: Money) -> Money {
+        let newMoney = self.convert(money.currency)
+        return Money(amount: newMoney.amount + money.amount, currency: money.currency)
+    }
+    func subtract(_ money: Money) -> Money {
+        let newMoney = self.convert(money.currency)
+        return Money(amount: newMoney.amount - money.amount, currency: money.currency)
+    }
+    
 }
 
 ////////////////////////////////////
@@ -35,3 +91,13 @@ public class Person {
 //
 public class Family {
 }
+
+
+
+
+
+
+
+
+
+

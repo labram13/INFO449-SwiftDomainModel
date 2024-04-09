@@ -209,7 +209,6 @@ public class Family {
         return totalIncome
     }
 }
-//test
 
 
 

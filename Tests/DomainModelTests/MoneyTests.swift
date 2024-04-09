@@ -96,11 +96,11 @@ class MoneyTests: XCTestCase {
         XCTAssert(total.amount == 2 )
     }
     
-//    func testInvalidCurrencyError() {
-//        XCTAssertThrowsError(try Money.create(amount: 12, currency: "LBA")) { error in
-//            XCTAssertTrue(error is YourTestClassName.CustomError, "Expected InvalidCurrency error")
-//        }
-//    }
+    func testInvalidCurrencyError() {
+        XCTAssertThrowsError(try Money.create(amount: 12, currency: "LBA")) { error in
+            XCTAssertTrue(error is CustomError, "Expected InvalidCurrency error")
+        }
+    }
 
 
     static var allTests = [

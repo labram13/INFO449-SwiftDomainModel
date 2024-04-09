@@ -15,7 +15,10 @@ struct Money {
     var amount: Int
     var currency: String
     
-    init(amount: Int, currency: String) {
+    init(amount: Int, currency: String)  {
+//        guard ["USD", "CAD", "EUR", "GBP"].contains(currency) else {
+//            throw CustomError.InvalidCurrency
+//        }
         self.amount = amount
         self.currency = currency
     }
@@ -52,20 +55,20 @@ struct Money {
         case "CAN":
             currAmount = currAmount * 1.25
         default:
-            return Money(amount: Int(currAmount), currency: convertTo)
+            return  Money(amount: Int(currAmount), currency: convertTo)
         }
         
         //Convert to desired currency
-        return Money(amount: Int(currAmount), currency: convertTo)
+        return  Money(amount: Int(currAmount), currency: convertTo)
     }
     
     func add(_ money: Money) -> Money {
         let newMoney = self.convert(money.currency)
-        return Money(amount: newMoney.amount + money.amount, currency: money.currency)
+        return  Money(amount: newMoney.amount + money.amount, currency: money.currency)
     }
     func subtract(_ money: Money) -> Money {
         let newMoney = self.convert(money.currency)
-        return Money(amount: newMoney.amount - money.amount, currency: money.currency)
+        return  Money(amount: newMoney.amount - money.amount, currency: money.currency)
     }
     
 }

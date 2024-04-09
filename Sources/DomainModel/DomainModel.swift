@@ -132,16 +132,30 @@ public class Person {
     var firstName: String
     var lastName: String
     var age: Int
-    var job: Job?
-    var spouse: Person?
+    var job: Job? {
+        didSet {
+                   
+                       if job != nil && age < 18 {
+                           self.job = nil
+                       }
+                   }
+               
+    }
+    var spouse: Person? {
+        didSet {
+                  
+            if spouse != nil && age < 18 {
+                           self.spouse = nil
+                       }
+                   }
+               
+    }
     
     init(firstName: String, lastName: String, age: Int) {
-            self.firstName = firstName
-            self.lastName = lastName
-            self.age = age
-            self.job = nil
-            self.spouse = nil // Assign nil to an optional property
-        }
+        self.firstName = firstName
+        self.lastName = lastName
+        self.age = age
+    }
     
     func toString() -> String {
         return "[Person: firstName:\(self.firstName) lastName:\(self.lastName) age:\(self.age) job:\(String(describing: self.job)) spouse:\(String(describing: self.spouse))]"
@@ -179,8 +193,9 @@ public class Family {
     func householdIncome() -> Int {
         var totalIncome = 0
         for member in members {
-            if member.job?.type != nil {
-                switch member.job?.type {
+            let job = member.job
+            if job != nil {
+                switch job?.type {
                 case .Hourly(let hourly):
                     totalIncome += Int(hourly * 2000.0)
                 case .Salary(let salary):
@@ -194,3 +209,20 @@ public class Family {
         return totalIncome
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

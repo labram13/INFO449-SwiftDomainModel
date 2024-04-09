@@ -80,19 +80,28 @@ class MoneyTests: XCTestCase {
     XCTAssert(total.amount == 10)
     XCTAssert(total.currency == "GBP")
   }
+
     
-    //added tests for subtraction
-//    func testSubtractUSDfromUSD() {
-//        let total = twelveUSD.subtract(tenUSD)
-//        XCTAssert(total.amount == 2)
-//        XCTAssert(total.currency == "USD")
-//    }
-//    
-//    func testSubtractGBPfromUSD() {
-//        let total = twelveUSD.subtract(fiveGBP)
-//        XCTAssert(total.amount == 5)
-//        XCTAssert(total.currency == "GBP")
-//    }
+    //Additonal tests
+    
+    
+    func testSubstractUSDfromUSD() {
+        let total = twelveUSD.subtract(tenUSD)
+        XCTAssert(total.amount == 2)
+        XCTAssert(total.currency == "USD")
+    }
+    func testSubtractGBPfromCAN() {
+        let total = fifteenCAN.subtract(tenUSD)
+        XCTAssert(total.currency == "USD")
+        XCTAssert(total.amount == 2 )
+    }
+    
+    func testInvalidCurrencyError() {
+        XCTAssertThrowsError(try Money.create(amount: 12, currency: "LBA")) { error in
+            XCTAssertTrue(error is YourTestClassName.CustomError, "Expected InvalidCurrency error")
+        }
+    }
+
 
     static var allTests = [
         ("testCanICreateMoney", testCanICreateMoney),

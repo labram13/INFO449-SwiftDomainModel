@@ -129,27 +129,68 @@ public class Job {
 // Person
 //
 public class Person {
+    var firstName: String
+    var lastName: String
+    var age: Int
+    var job: Job?
+    var spouse: Person?
+    
+    init(firstName: String, lastName: String, age: Int) {
+            self.firstName = firstName
+            self.lastName = lastName
+            self.age = age
+            self.job = nil
+            self.spouse = nil // Assign nil to an optional property
+        }
+    
+    func toString() -> String {
+        return "[Person: firstName:\(self.firstName) lastName:\(self.lastName) age:\(self.age) job:\(String(describing: self.job)) spouse:\(String(describing: self.spouse))]"
+    }
+    
 }
 
 ////////////////////////////////////
 // Family
 //
 public class Family {
+    var members: [Person] = []
+    
+    init(spouse1: Person, spouse2: Person) {
+        self.members.append(spouse1)
+        self.members.append(spouse2)
+    }
+    
+    func haveChild(_ child: Person) -> Bool {
+        var isLegal = false
+        for member in self.members {
+            if member.age >= 21 {
+                isLegal = true
+            }
+        }
+        switch isLegal {
+        case false:
+            return false
+        case true:
+            self.members.append(child)
+            return true
+        }
+    }
+    
+    func householdIncome() -> Int {
+        var totalIncome = 0
+        for member in members {
+            if member.job?.type != nil {
+                switch member.job?.type {
+                case .Hourly(let hourly):
+                    totalIncome += Int(hourly * 2000.0)
+                case .Salary(let salary):
+                    totalIncome += Int(salary)
+                default:
+                    break
+                    
+                }
+            }
+        }
+        return totalIncome
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

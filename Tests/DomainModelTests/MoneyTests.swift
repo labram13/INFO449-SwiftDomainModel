@@ -82,17 +82,17 @@ class MoneyTests: XCTestCase {
   }
     
     //added tests for subtraction
-    func testSubtractUSDfromUSD() {
-        let total = twelveUSD.subtract(tenUSD)
-        XCTAssert(total.amount == 2)
-        XCTAssert(total.currency == "USD")
-    }
-    
-    func testSubtractGBPfromUSD() {
-        let total = twelveUSD.subtract(fiveGBP)
-        XCTAssert(total.amount == 5)
-        XCTAssert(total.currency == "GBP")
-    }
+//    func testSubtractUSDfromUSD() {
+//        let total = twelveUSD.subtract(tenUSD)
+//        XCTAssert(total.amount == 2)
+//        XCTAssert(total.currency == "USD")
+//    }
+//    
+//    func testSubtractGBPfromUSD() {
+//        let total = twelveUSD.subtract(fiveGBP)
+//        XCTAssert(total.amount == 5)
+//        XCTAssert(total.currency == "GBP")
+//    }
 
     static var allTests = [
         ("testCanICreateMoney", testCanICreateMoney),

@@ -15,6 +15,9 @@ struct Money {
     var amount: Int
     var currency: String
     
+    //run with error
+    //make sure to point out the error
+    //conversion back to back between other currencies
     init(amount: Int, currency: String)  {
 //        guard ["USD", "CAD", "EUR", "GBP"].contains(currency) else {
 //            throw CustomError.InvalidCurrency

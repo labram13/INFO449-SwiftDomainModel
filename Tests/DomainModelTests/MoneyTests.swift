@@ -101,6 +101,10 @@ class MoneyTests: XCTestCase {
             XCTAssertTrue(error is CustomError, "Expected InvalidCurrency error")
         }
     }
+    
+    //other ideas
+    // multiple conversions back to back (through all currencies)
+    //add functionalities and tests for those (convert jobs)
 
 
     static var allTests = [
